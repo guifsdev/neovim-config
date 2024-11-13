@@ -1,2 +1,2 @@
 # dotfiles
-My neovim environment
+My neovim environment config files.
