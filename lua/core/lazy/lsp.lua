@@ -162,8 +162,25 @@ return {
 		--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-
+		--
+		-- PHP
+		require("lspconfig").intelephense.setup({
+			commands = {
+				IntelephenseIndex = {
+					function()
+						vim.lsp.buf.execute_command({ command = "intelephense.index.workspace" })
+					end,
+				},
+			},
+			on_attach = function(client, bufnr)
+				-- client.server_capabilities.documentFormattingProvider = false
+				-- client.server_capabilities.documentRangeFormattingProvider = false
+				-- if client.server_capabilities.inlayHintProvider then
+				--   vim.lsp.buf.inlay_hint(bufnr, true)
+				-- end
+			end,
+			capabilities = capabilities,
+		})
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--
@@ -209,7 +226,7 @@ return {
 		--    :Mason
 		--
 		--  You can press `g?` for help in this menu.
-		require("mason").setup()
+		-- require("mason").setup()
 
 		-- You can add other tools here that you want Mason to install
 		-- for you, so that they are available from within Neovim.
