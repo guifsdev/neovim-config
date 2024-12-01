@@ -189,6 +189,38 @@ return {
 				end,
 				capabilities = capabilities,
 			})
+			-- Vue, JavaScript, TypeScript
+			local mason_registry = require("mason-registry")
+			local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+				.. "/node_modules/@vue/language-server"
+
+			local lspconfig = require("lspconfig")
+
+			lspconfig.ts_ls.setup({
+				init_options = {
+					plugins = {
+						{
+							name = "@vue/typescript-plugin",
+							location = vue_language_server_path,
+							languages = { "vue" },
+						},
+					},
+				},
+				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+			})
+
+			-- No need to set `hybridMode` to `true` as it's the default value
+			lspconfig.volar.setup({
+				on_attach = function(client, bufnr)
+					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.documentRangeFormattingProvider = false
+					-- if client.server_capabilities.inlayHintProvider then
+					--   vim.lsp.buf.inlay_hint(bufnr, true)
+					-- end
+				end,
+				capabilities = capabilities,
+			})
+
 			-- Enable the following language servers
 			--	Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 			--

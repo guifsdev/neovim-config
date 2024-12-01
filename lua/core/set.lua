@@ -68,3 +68,10 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+vim.opt.linebreak = true
+
+-- vim.g.netrw_browse_split = 2 -- Open Netrw in a vertical split on the left
+vim.g.netrw_winsize = 20 -- Set the width of the split to 25% of the screen
+vim.g.netrw_keepdir = 1 -- Keep Netrw synchronized with the working directory
+vim.g.netrw_altv = 1 -- Adjust vertical splits for better behavior
