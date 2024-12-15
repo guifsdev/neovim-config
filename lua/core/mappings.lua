@@ -34,8 +34,31 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<leader>h", vim.diagnostic.open_float, { desc = "Open diagnostic hover window" })
+vim.keymap.set(
+	"n",
+	"<leader>k",
+	"<cmd>lua vim.lsp.buf.hover()<cr>",
+	{ desc = "Open floating window. Jump to floating if open" }
+)
+--  Jump to definition in a split window
+vim.keymap.set("n", "gv", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", { silent = true })
+vim.keymap.set("n", "gh", "<cmd>split | lua vim.lsp.buf.definition()<CR>", { silent = true })
 
-vim.keymap.set("n", "-", vim.cmd.Ex)
+-- vim.keymap.set("n", "-", vim.cmd.Ex)
 
 -- Open Netrw in a vertical split
-vim.keymap.set("n", "<leader>e", ":Lex<CR>", { noremap = true, silent = true, desc = "Open Netrw" })
+-- vim.keymap.set("n", "<leader>e", ":Lex<CR>", { noremap = true, silent = true, desc = "Open Netrw" })
+
+vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>", { desc = "Open Telescope file browser" })
+
+vim.keymap.set(
+	"n",
+	"<space>bfb",
+	":Telescope file_browser path=%:p:h<CR>",
+	{ desc = "Open Telescope file browser within the directory of the current buffer" }
+)
+
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save the current file" })
+
+-- Make the last word typed UPPERCASE
+vim.keymap.set("i", "<C-F>", "<Esc>gUiw`]a")

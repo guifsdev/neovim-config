@@ -1,6 +1,6 @@
+require("core.set")
 require("core.mappings")
 require("core.lazy_init")
-require("core.set")
 require("core.snippets")
 
 -- [[ Basic Autocommands ]]
